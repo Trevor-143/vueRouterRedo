@@ -1,5 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import AboutView from '../views/AboutView.vue'
+import Unavailable from '../views/Notfound.vue'
+import Jobs from '../views/jobs/Jobs.vue'
+import JobsDetails from '../views/jobs/JobsDetails.vue'
 
 const routes = [
   {
@@ -8,12 +12,31 @@ const routes = [
     component: HomeView
   },
   {
+    path: '/jobs',
+    name: 'jobs',
+    component: Jobs
+  },
+  {
+    path: '/jobs/:id',
+    name: 'jobsDetails',
+    component: JobsDetails,
+    props: true
+  },
+  //for redirects from old known links
+  {
+    path: '/All-jobs',
+    redirect: '/jobs'
+  },
+  {
     path: '/about',
     name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    component: AboutView
+  },
+  // for not page found
+  {
+    path: '/:catchALL(.*)',
+    name: "Unavailable",
+    component: Unavailable,
   }
 ]
 
